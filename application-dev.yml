@@ -1,0 +1,27 @@
+# ══════════════════════════════════════════════
+# Configuration COMMUNE - Environnement DEV
+# ══════════════════════════════════════════════
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+# Logging verbeux en dev
+logging:
+  level:
+    root: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.cloud: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  # Tous les endpoints en dev
+  endpoint:
+    health:
+      show-details: always

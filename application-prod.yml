@@ -1,0 +1,32 @@
+# ══════════════════════════════════════════════
+# Configuration COMMUNE - Environnement PROD
+# ══════════════════════════════════════════════
+
+spring:
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate  # Ne jamais modifier le schéma en prod
+
+# Logging minimal en production
+logging:
+  level:
+    root: WARN
+    org.springframework.web: WARN
+    org.springframework.cloud: INFO
+    fello.miage: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics  # Endpoints limités en prod
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# Sécurité renforcée
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 15
+    lease-expiration-duration-in-seconds: 45
