@@ -1,66 +1,15 @@
-# ══════════════════════════════════════════════
-# Configuration spécifique API GATEWAY
-# ══════════════════════════════════════════════
-
-server:
-  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
 
 spring:
-  application:
-    name: api-gateway
-  
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-      
       routes:
-        # User Service
         - id: user-service
           uri: lb://user-service
           predicates:
             - Path=/api/users/**
           filters:
             - StripPrefix=1
-            - name: CircuitBreaker
-              args:
-                name: userServiceCircuitBreaker
-                fallbackUri: forward:/fallback/users
-      
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - PATCH
-              - OPTIONS
-            allowedHeaders: "*"
-            allowCredentials: false
-
-# Resilience4J
-resilience4j:
-  circuitbreaker:
-    instances:
-      userServiceCircuitBreaker:
-        sliding-window-size: 10
-        minimum-number-of-calls: 5
-        failure-rate-threshold: 50
-        wait-duration-in-open-state: 10000
-        permitted-number-of-calls-in-half-open-state: 3
-  
-  timelimiter:
-    instances:
-      userServiceCircuitBreaker:
-        timeout-duration: 3s
-
-# Logging
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    reactor.netty: INFO
