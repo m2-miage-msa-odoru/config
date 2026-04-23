@@ -1,13 +1,13 @@
 spring:
   datasource:
     url: jdbc:postgresql://postgres:5432/msuser
-    username: user_svc
-    password: Fello2020@
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   rabbitmq:
     host: rabbitmq
     port: 5672
-    username: msuser_admin
-    password: msuser_mdp
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
 
 eureka:
   client:
