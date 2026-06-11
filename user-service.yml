@@ -16,3 +16,5 @@ eureka:
 rabbitmq:
   exchange:
     user-events: user.events.exchange
+  routing-key:
+    user-registered: user.registered
