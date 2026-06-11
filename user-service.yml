@@ -18,3 +18,4 @@ rabbitmq:
     user-events: user.events.exchange
   routing-key:
     user-registered: user.registered
+    expertise-updated: user.expertise.updated
